@@ -1,6 +1,8 @@
 const path = require('path');
 //traemos esta dependencia que la instalamos con un comando de npm previamente
 const HtmlWebpackPlugin = require('html-webpack-plugin'); 
+// traermos el loader de css instalado con npm i mini-css-extract-plugin css-loader -D
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   // Entry nos permite decir el punto de entrada de nuestra aplicación
@@ -28,7 +30,14 @@ module.exports = {
         },
         // Exclude permite omitir archivos o carpetas especificas
         exclude: /node_modules/
+      },
+      {
+        // Test declara que extensión de archivos aplicara el loader
+        test: /\.css$/i,
+         // Use es un arreglo u objeto donde dices que loader aplicaras
+         use: [ MiniCssExtractPlugin.loader,"css-loader",]
       }
+
     ]
   },
    // Ese incluye la seccion de plugins
@@ -39,7 +48,9 @@ module.exports = {
         template: './public/index.html',
          // indicas cual es el nombre del archivo de salida
         filename: './index.html'
-        })
+        }),
+         // se incluye nuevo plugin de cs loader
+        new MiniCssExtractPlugin()
     ]
 }
 
