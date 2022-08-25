@@ -40,6 +40,11 @@ module.exports = {
         test: /\.css$/i,
          // Use es un arreglo u objeto donde dices que loader aplicaras
          use: [ MiniCssExtractPlugin.loader,"css-loader",]
+      },
+      //nueva recla que esta incluira en webpack para hacer hash  base 64 de las imagenes
+      {
+        test: /\.png/,
+        type: "asset/resource"
       }
 
     ]
