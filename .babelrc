@@ -1,0 +1,12 @@
+/* 
+npm install -D babel-loader @babel/core @babel/preset-env @babel/plugin-transform-runtime
+*/
+
+{
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
+  }
