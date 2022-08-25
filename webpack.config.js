@@ -3,6 +3,10 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); 
 // traermos el loader de css instalado con npm i mini-css-extract-plugin css-loader -D
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+//traemos el loader de copy pack npm i copy-webpack-plugin -D
+const CopyPlugin = require('copy-webpack-plugin');
+const { copyFile } = require('fs');
+
 
 module.exports = {
   // Entry nos permite decir el punto de entrada de nuestra aplicación
@@ -50,7 +54,18 @@ module.exports = {
         filename: './index.html'
         }),
          // se incluye nuevo plugin de cs loader
-        new MiniCssExtractPlugin()
+        new MiniCssExtractPlugin(),
+        // se incluye nuevo plugin para copiar los archivos
+        new CopyPlugin({
+          patterns: [
+            {
+              // se indica desde donde se copia
+              from: path.resolve(__dirname, "src", "assets/images"),
+              // se indica ruta de destino
+              to: "assets/images"
+            }
+          ]
+        }),
     ]
 }
 
