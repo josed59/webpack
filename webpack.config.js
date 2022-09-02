@@ -9,6 +9,8 @@ const { copyFile } = require('fs');
 // para minificar el codigo css se utiliza npm install css-minimizer-webpack-plugin -D y tenser ya esta incluido ej webpack 5 y es para minificar js pero lo instale npm install terser-webpack-plugin --save-dev
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const terser = require('terser-webpack-plugin');
+// plugin para valiables de entorno npm install -D dotenv-webpack se debe crear los archivos .env y .env.example process.env.API  ”
+const dotenv = require('dotenv-webpack');
 
 
 
@@ -97,6 +99,7 @@ module.exports = {
             }
           ]
         }),
+        new dotenv()
     ], 
     optimization: {
       minimize: true,
