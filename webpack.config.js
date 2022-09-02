@@ -11,6 +11,8 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const terser = require('terser-webpack-plugin');
 // plugin para valiables de entorno npm install -D dotenv-webpack se debe crear los archivos .env y .env.example process.env.API  ”
 const dotenv = require('dotenv-webpack');
+// pluging para limpiar ruta de dist npm install --save-dev clean-webpack-plugin
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 
 
@@ -99,7 +101,8 @@ module.exports = {
             }
           ]
         }),
-        new dotenv()
+        new dotenv(),
+        new CleanWebpackPlugin(),
     ], 
     optimization: {
       minimize: true,
