@@ -101,7 +101,13 @@ module.exports = {
         }),
         new dotenv()
     ], 
-   
+    devServer: {
+      static: path.join(__dirname, 'dist'),
+      compress: true,
+      historyApiFallback: true,
+      port: 5003,
+      open: true,
+    }
     
 }
 
