@@ -6,6 +6,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 //traemos el loader de copy pack npm i copy-webpack-plugin -D
 const CopyPlugin = require('copy-webpack-plugin');
 const { copyFile } = require('fs');
+// para minificar el codigo css se utiliza npm install css-minimizer-webpack-plugin -D y tenser ya esta incluido ej webpack 5 y es para minificar js pero lo instale npm install terser-webpack-plugin --save-dev
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const terser = require('terser-webpack-plugin');
+
+
 
 
 module.exports = {
@@ -17,7 +22,7 @@ module.exports = {
     // Con path.resolve podemos decir dónde va estar la carpeta y la ubicación del mismo
     path: path.resolve(__dirname, "dist"),
     // filename le pone el nombre al archivo final
-    filename: "main.js",
+    filename: "[name].[contenthash].js",
      // EL NOMBRE DEL ARCHIVO FINAL,
      assetModuleFilename: 'assets/images/[hash][ext][query]'
     
@@ -54,7 +59,7 @@ module.exports = {
         test: /\.(woff|woff2)$/,
         type: "asset/resource",
         generator: {
-          filename: "assets/fonts/[name][ext]"
+          filename: "assets/fonts/[name][contenthash][ext]"
         }
       }
 
@@ -70,7 +75,10 @@ module.exports = {
         filename: './index.html'
         }),
          // se incluye nuevo plugin de cs loader
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+          //se modifica para mover el archivo y agrega hash
+          filename:'assets/[name].[contenthash].css'
+        }),
         // se incluye nuevo plugin para copiar los archivos
         new CopyPlugin({
           patterns: [
@@ -82,7 +90,15 @@ module.exports = {
             }
           ]
         }),
-    ]
+    ], 
+    optimization: {
+      minimize: true,
+              minimizer: [
+                  new CssMinimizerPlugin(),
+                  new terser
+              ],
+    },  
+    
 }
 
 //npx webpack --mode production --config webpack.config.js
