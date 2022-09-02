@@ -17,7 +17,10 @@ module.exports = {
     // Con path.resolve podemos decir dónde va estar la carpeta y la ubicación del mismo
     path: path.resolve(__dirname, "dist"),
     // filename le pone el nombre al archivo final
-    filename: "main.js"
+    filename: "main.js",
+     // EL NOMBRE DEL ARCHIVO FINAL,
+     assetModuleFilename: 'assets/images/[hash][ext][query]'
+    
   },
   resolve: {
     // Aqui ponemos las extensiones que tendremos en nuestro proyecto para webpack los lea
@@ -41,10 +44,18 @@ module.exports = {
          // Use es un arreglo u objeto donde dices que loader aplicaras
          use: [ MiniCssExtractPlugin.loader,"css-loader",]
       },
-      //nueva recla que esta incluira en webpack para hacer hash  base 64 de las imagenes
+      //nueva regla que esta incluira en webpack para hacer hash  base 64 de las imagenes
       {
         test: /\.png/,
         type: "asset/resource"
+      },
+      //nueva regla que se utiliza para mover los archivos de font
+      {
+        test: /\.(woff|woff2)$/,
+        type: "asset/resource",
+        generator: {
+          filename: "assets/fonts/[name][ext]"
+        }
       }
 
     ]
