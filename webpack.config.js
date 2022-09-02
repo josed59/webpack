@@ -29,7 +29,14 @@ module.exports = {
   },
   resolve: {
     // Aqui ponemos las extensiones que tendremos en nuestro proyecto para webpack los lea
-    extensions: [".js"]
+    extensions: [".js"],
+    //incluimos alias para facilitar las rutas 
+    alias: {
+      '@utils': path.resolve(__dirname, 'src/utils/'),
+      '@templates': path.resolve(__dirname, 'src/templates/'),
+      '@styles': path.resolve(__dirname, 'src/styles/'),
+      '@images': path.resolve(__dirname, 'src/assets/images/')
+    },
   },
   module: {
     rules: [
