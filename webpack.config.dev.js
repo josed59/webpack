@@ -29,6 +29,8 @@ module.exports = {
     
   },
   mode: 'development',
+  //se incluye para indicar el mapeo entre o  generado por webpack y babel
+  devtool:'source-map',
   resolve: {
     // Aqui ponemos las extensiones que tendremos en nuestro proyecto para webpack los lea
     extensions: [".js"],
@@ -114,6 +116,6 @@ module.exports = {
 //npx webpack --mode production --config webpack.config.js
 //npm i html-webpack-plugin -D SE instala para procesar el HTML
 /* 
-npm install -D babel-loader @babel/core @babel/preset-env @babel/plugin-transform-runtime se instala para que nuestro codigo js sea compatible con
+npm install -D  -loader @babel/core @babel/preset-env @babel/plugin-transform-runtime se instala para que nuestro codigo js sea compatible con
 todos los navegadores
 */
